@@ -16,7 +16,7 @@ def main():
     print(f'Color image channels: {color_img_channels}')
     print(f'Color image channels: {gray_img_channels}')
 
-    cv2.namedWindow("Display", cv2.WINDOW_AUTOSIZE) 
+    cv2.namedWindow("Display", cv2.WINDOW_NORMAL) 
     cv2.imshow("color image ", image)
     cv2.imshow("gray image", image_gray)
     cv2.waitKey(0)
