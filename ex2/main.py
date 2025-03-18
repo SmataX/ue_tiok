@@ -1,7 +1,5 @@
 import cv2
 
-
-
 def zad1():
     image = cv2.imread("sad_cat.png") 
     pixel = image[0, 0]
