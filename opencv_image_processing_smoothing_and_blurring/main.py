@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 def zad1():
     image = cv2.imread("sad_cat.jpg")
@@ -35,26 +36,48 @@ def zad3():
 
 def zad4():
     image = cv2.imread("image.jpg")
-    cv2.imshow("Original", image)
 
-    img_blur = cv2.blur(image, (9, 9))
-    img_gaussian_blur = cv2.GaussianBlur(image, (9, 9), 1)
-    img_median_blur = cv2.medianBlur(image, 9)
-    img_bilateral_filter = cv2.bilateralFilter(image, 11, 21, 7)
-    cv2.imshow("img_blur", img_blur)
-    cv2.imshow("img_gaussian_blur", img_gaussian_blur)
-    cv2.imshow("img_median_blur", img_median_blur)
-    cv2.imshow("img_bilateral_filter", img_bilateral_filter)
+    blur = cv2.blur(image, (5, 5))
+    gblur = cv2.GaussianBlur(image, (5, 5), 0)
+    mblur = cv2.medianBlur(image, 5)
+    bblur = cv2.bilateralFilter(image, 9, 75, 75)
+
+    cv2.imshow("Original", image)
+    cv2.imshow("Blur", blur)
+    cv2.imshow("Gaussian", gblur)
+    cv2.imshow("Median", mblur)
+    cv2.imshow("Bilateral", bblur)
     
     # 1. img_median_blur
     # 2. img_bilateral_filter
 
 def zad5():
-    pass
+    image = cv2.imread("image.jpg")
+
+    blur = cv2.blur(image, (5, 5))
+    gblur = cv2.GaussianBlur(image, (5, 5), 0)
+    mblur = cv2.medianBlur(image, 5)
+    bblur = cv2.bilateralFilter(image, 9, 75, 75)
+
+    cv2.imshow("Original", image)
+    cv2.imshow("Blur", blur)
+    cv2.imshow("Gaussian", gblur)
+    cv2.imshow("Median", mblur)
+    cv2.imshow("Bilateral", bblur)
 
 def zad6():
-    pass
+    image = cv2.imread("portrait.png")
+
+    mask = np.zeros(image.shape[:2], dtype="uint8")
+    cv2.rectangle(mask, (100, 100), (400, 400), 255, -1)  # maska na osobę
+
+    blurred = cv2.GaussianBlur(image, (21, 21), 0)
+    result = np.where(mask[:, :, np.newaxis] == 255, image, blurred)
+
+    cv2.imshow("Original", image)
+    cv2.imshow("Simulated DoF", result)
+
 
 if __name__ == "__main__":
-    zad4()
+    zad6()
     cv2.waitKey(0)
